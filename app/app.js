@@ -9,6 +9,9 @@ import mongoSanitize from 'express-mongo-sanitize';
 import { HOST_URL, whitelist } from './config.js';
 import globalErrHandler from './utils/errorHandler.js';
 
+import studentRouter from './student/routes.js';
+import bookRouter from './book/routes.js';
+
 const app = express();
 
 // middleware
@@ -54,6 +57,9 @@ app.use(express.static('public'));
 app.get("/",(req,res)=>{
     res.status(200).json({message:"Server working..."})
 })
+
+app.use('/api/v1/book',bookRouter);
+app.use('/api/v1/student', studentRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server!`, 404));

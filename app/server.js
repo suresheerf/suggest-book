@@ -7,6 +7,7 @@ import { DBURI, PORT } from './config.js';
 import app from './app.js';
 import logger from './utils/logger.js';
 
+console.log("bd :: ",DBURI)
 const server = http.createServer(app);
 connect(DBURI)
   .then(() => {
